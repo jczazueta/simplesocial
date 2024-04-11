@@ -10,6 +10,7 @@ from django.views import generic
 from django.shortcuts import get_object_or_404
 
 from groups.models import Group,GroupMember
+from . import models
 
 class CreateGroup(LoginRequiredMixin,generic.CreateView):
     fields = ('name','description')
@@ -56,4 +57,4 @@ class LeaveGroup(LoginRequiredMixin,generic.RedirectView):
         else:
             membership.delete()
             messages.success(self.request,'You have left the group!')
-        return super().get(request, *args**kwargs)
+        return super().get(request, *args,**kwargs)

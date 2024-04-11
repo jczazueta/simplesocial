@@ -9,7 +9,7 @@
       <ul class='list-unstyled'>
         {% for member_group in get_user_groups %}
         <li class='group li-with-bullet'>
-          <a href="{% url 'groups:single' slug=member_group.group.slug %}"></a>
+          <a href="{% url 'groups:single' slug=member_group.group.slug %}">{{ member_group.group.name }}</a>
         </li>
         {% endfor %}
       </ul>
@@ -20,16 +20,16 @@
     <div class="content">
       <h5 class'title'>All Groups</h5>
       <ul class='list-unstyled'>
+        {# {% get_other_groups as other_groups %} #}
         {% for other_group in get_other_groups %}
         <li class='group li-with-bullet'>
-          <a href="{% url 'groups:single' slug=other_group.slug %}"></a>
+          <a href="{% url 'groups:single' slug=other_group.slug %}">{{ other_group.name }</a>
         </li>
         {% endfor %}
 
       </ul>
 
     </div>
-
   </div>
 </div>
 
@@ -44,5 +44,4 @@
   {% endfor %}
 
 </div>
-
 {% endblock %}

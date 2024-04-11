@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
+from django.conf import settings
+from django.urls import reverse
 
 # Create your models here.
 import misaka
@@ -22,7 +24,7 @@ class Group(models.Model):
     def save(self,*args,**kwargs):
         self.slug = slugify(self.name)
         self.description_html =misaka.html(self.description)
-        super.save(*args,**kwargs)
+        super().save(*args,**kwargs)
 
 
     def get_absolute_url(self):
