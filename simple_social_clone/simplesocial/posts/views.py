@@ -15,9 +15,23 @@ from . import forms
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+# Don't forget to import the model
+from groups.models import Group
+
 class PostList(SelectRelatedMixin,generic.ListView):
-    model = models.Post
-    select_related = ('user', 'group')
+ model = models.Post
+
+ select_related = ('user','group')
+
+ queryset=models.Post.objects.all()
+
+ def get_context_data(self, **kwargs):
+
+     context = super(PostList, self).get_context_data(**kwargs)
+     context['user_groups'] = Group.objects.filter(members__in=[self.request.user])
+     context['all_groups'] = Group.objects.all()
+
+     return context
 
 class UserPosts(generic.ListView):
     model = models.Post
